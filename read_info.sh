@@ -2,7 +2,7 @@
 
 # 定义文件路径
 XML_FILE="/data/data/com.dragon.read/shared_prefs/applog_stats.xml"
-TOML_FILE="./wrangler.toml"
+TOML_FILE="/data/data/com.termux/files/home/fqnovel-api/wrangler.toml"
 
 # 检查 XML 文件是否存在
 if [ ! -f "$XML_FILE" ]; then
