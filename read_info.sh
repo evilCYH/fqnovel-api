@@ -1,5 +1,3 @@
-#!/bin/bash
-
 XML_FILE="/data/data/com.dragon.read/shared_prefs/applog_stats.xml"
 
 if [ ! -f "$XML_FILE" ]; then
