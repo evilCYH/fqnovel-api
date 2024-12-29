@@ -4,6 +4,9 @@ XML_FILE="/data/data/com.dragon.read/shared_prefs/applog_stats.xml"
 TOML_FILE="/data/data/com.termux/files/home/fqnovel-api/wrangler.toml"
 REPO_DIR="/data/data/com.termux/files/home/fqnovel-api/"
 
+# 切换到仓库目录
+cd $REPO_DIR
+
 # 检查 XML 文件是否存在
 if [ ! -f "$XML_FILE" ]; then
   echo "文件不存在: $XML_FILE"
@@ -24,8 +27,6 @@ if [ -f "$TOML_FILE" ]; then
   sed -i "s/install_id = \".*\"/install_id = \"$install_id\"/" $TOML_FILE
   sed -i "s/server_device_id = \".*\"/server_device_id = \"$device_id\"/" $TOML_FILE
 
-  # shellcheck disable=SC2164
-  cd $REPO_DIR
   # 检查 Git 是否有文件更改
   /data/data/com.termux/files/usr/bin/git diff --exit-code $TOML_FILE
   if [ $? -ne 0 ]; then
