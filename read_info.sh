@@ -25,12 +25,12 @@ if [ -f "$TOML_FILE" ]; then
   sed -i "s/server_device_id = \".*\"/server_device_id = \"$device_id\"/" $TOML_FILE
 
   # 检查 Git 是否有文件更改
-  git diff --exit-code $TOML_FILE
+  /data/data/com.termux/files/usr/bin/git diff --exit-code $TOML_FILE
   if [ $? -ne 0 ]; then
     # 如果有更改，提交并推送
-    git add $TOML_FILE
-    git commit -m "Update IDs in wrangler.toml"
-    git push origin master
+    /data/data/com.termux/files/usr/bin/git add $TOML_FILE
+    /data/data/com.termux/files/usr/bin/git commit -m "Update IDs in wrangler.toml"
+    /data/data/com.termux/files/usr/bin/git push origin master
   else
     echo "没有检测到 ID 的更改，不进行 Git 操作。"
   fi
