@@ -2,10 +2,10 @@
 
 XML_FILE="/data/data/com.dragon.read/shared_prefs/applog_stats.xml"
 TOML_FILE="/data/data/com.termux/files/home/fqnovel-api/wrangler.toml"
-REPO_DIR="/data/data/com.termux/files/home/fqnovel-api/"
-
-# 切换到仓库目录
-cd $REPO_DIR
+#REPO_DIR="/data/data/com.termux/files/home/fqnovel-api/"
+#
+## 切换到仓库目录
+#cd $REPO_DIR
 
 # 检查 XML 文件是否存在
 if [ ! -f "$XML_FILE" ]; then
@@ -28,12 +28,12 @@ if [ -f "$TOML_FILE" ]; then
   sed -i "s/server_device_id = \".*\"/server_device_id = \"$device_id\"/" $TOML_FILE
 
   # 检查 Git 是否有文件更改
-  /data/data/com.termux/files/usr/bin/git diff --exit-code $TOML_FILE
+  git diff --exit-code $TOML_FILE
   if [ $? -ne 0 ]; then
     # 如果有更改，提交并推送
-    /data/data/com.termux/files/usr/bin/git add $TOML_FILE
-    /data/data/com.termux/files/usr/bin/git commit -m "Update IDs in wrangler.toml"
-    /data/data/com.termux/files/usr/bin/git push origin master
+    git add $TOML_FILE
+    git commit -m "Update IDs in wrangler.toml"
+    git push origin master
   else
     echo "没有检测到 ID 的更改，不进行 Git 操作。"
   fi
