@@ -5,9 +5,9 @@ TOML_FILE="/data/data/com.termux/files/home/fqnovel-api/wrangler.toml"
 REPO_DIR="/data/data/com.termux/files/home/fqnovel-api/"
 export PATH=/data/data/com.termux/files/usr/bin:/data/data/com.termux/files/usr/bin/applets:$PATH
 
-#
-## 切换到仓库目录
+# 切换到仓库目录
 cd $REPO_DIR
+git pull
 
 # 检查 XML 文件是否存在
 if [ ! -f "$XML_FILE" ]; then
@@ -41,4 +41,17 @@ if [ -f "$TOML_FILE" ]; then
   fi
 else
   echo "TOML 文件不存在: $TOML_FILE"
+fi
+
+LOG_FILE="/data/data/com.termux/files/home/fq.log"
+MAX_SIZE=10485760  # 10MB
+
+# 获取当前日志大小
+FILE_SIZE=$(stat -c%s "$LOG_FILE" 2>/dev/null)
+
+if [ -n "$FILE_SIZE" ] && [ $FILE_SIZE -ge $MAX_SIZE ]; then
+  #压缩也可以旧日志
+  tar zcf "$LOG_FILE.$(date +%Y%m%d%H%M%S).tar.gz" "$LOG_FILE" && rm "$LOG_FILE"
+  # 创建新日志文件
+  touch "$LOG_FILE"
 fi
